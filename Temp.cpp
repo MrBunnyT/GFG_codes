@@ -76,25 +76,55 @@ typedef vector<int> vi;
 typedef vector<ll> vl;
 typedef vector<pii> vpii;
 
-int Solve(int m,int n)
-{
-    return m+n;
-}
 
+int uniquePath(int M, int N)
+{
+    int dp[M+1][N+1];
+    
+    for(int i = 1; i <= M; i++)
+    {
+        dp[i][1] = 1;
+    }
+    
+    for(int j = 1; j <= N; j++)
+    {
+        dp[1][j] = 1;
+    }
+    
+    for(int i = 2; i <= M; i++)
+    {
+        for(int j = 2; j <= N; j++)
+        {
+            dp[i][j] = dp[i-1][j] + dp[i][j-1];
+        }
+    }
+
+    for (int i = 1; i < M+1; i++)
+    {
+        for (int j = 1; j < N+1; j++)
+        {
+            cout<<dp[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    
+    
+    return dp[M][N];
+}
 int main()
 {
-
+    #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin); 
     freopen("output.txt", "w", stdout);
-    ios_base::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    srand(chrono::high_resolution_clock::now().time_since_epoch().count());
-    int t;cin >> t;int ans[t];
-    for(int i=0;i<t;i++) {
-        int m,n;
-        cin>>m>>n;
-        ans[i]=Solve(m,n);
+    #endif
+    int T;
+    cin >> T;
+    while(T--)
+    {
+        int M, N;
+        cin >> M >> N;
+        
+        cout << uniquePath(M, N) << endl;
     }
-    for(int i=0;i<t;i++)
-        cout<<ans[i]<<"\n";
-
+	return 0;
 }
