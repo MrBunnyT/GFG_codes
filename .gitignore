@@ -1,5 +1,6 @@
 /Testing.cpp
 /Test.cpp
 *.exe
+*.o
 input.txt
 output.txt
